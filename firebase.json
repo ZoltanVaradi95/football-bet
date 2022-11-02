@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "dist/bet-football",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      {
+        "source": "/v4/:path*",
+        "destination": "https://api.football-data.org/v4/:path",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

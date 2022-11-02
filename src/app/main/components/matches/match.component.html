@@ -1,0 +1,47 @@
+<div *ngIf="match">
+  <div class="row">
+    <h1>{{ match.competition.name }}</h1>
+  </div>
+
+  <div class="row">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+          <img mat-card-image [src]="match.homeTeam.crest" />
+        </div>
+        <mat-card-title
+          >{{ match.homeTeam.name }}
+          {{ match.score.fullTime.home }}</mat-card-title
+        >
+        <mat-card-subtitle>{{ match.homeTeam.shortName }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <div class="score">
+      <div class="score-container">
+        <p class="halftime-score">
+          ({{ match.score.halfTime.home | displayScore }})
+        </p>
+        {{ match.score.fullTime.home | displayScore }}
+        :
+      </div>
+
+      <div class="score-container">
+        {{ match.score.fullTime.away | displayScore }}
+        <p class="halftime-score">
+          ({{ match.score.halfTime.away | displayScore }})
+        </p>
+      </div>
+    </div>
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image">
+          <img mat-card-image [src]="match.awayTeam.crest" />
+        </div>
+        <mat-card-title>{{ match.awayTeam.name }} </mat-card-title>
+        <mat-card-subtitle>{{ match.awayTeam.shortName }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>

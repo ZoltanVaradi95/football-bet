@@ -1,0 +1,89 @@
+<div class="title-container">
+  <h1>Football competitions</h1>
+</div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select
+      [(ngModel)]="eventStatusFilter"
+      (selectionChange)="onFilterChange($event)"
+    >
+      <mat-option
+        [value]="value"
+        *ngFor="let value of eventStatus | keyvalue"
+        >{{ value.value }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8"
+  *ngIf="dataSource"
+>
+  <!-- Position Column -->
+  <ng-container matColumnDef="area">
+    <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.area.name }}</mat-cell>
+  </ng-container>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="home">
+    <mat-header-cell *matHeaderCellDef> Home </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.homeTeam.name }}</mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="score">
+    <mat-header-cell *matHeaderCellDef> Score </mat-header-cell>
+    <mat-cell *matCellDef="let row"
+      ><b>
+        {{ row.score.fullTime.home | displayScore }}:
+        {{ row.score.fullTime.away | displayScore }}
+      </b></mat-cell
+    >
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="away">
+    <mat-header-cell *matHeaderCellDef> Away </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.awayTeam.name }} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="utcDate">
+    <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.utcDate | date: "short"}} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.status }} </mat-cell>
+  </ng-container>
+
+  <!-- ACTION BUTTONS -->
+  <ng-container matColumnDef="actionButtons">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button
+        [routerLink]="['./', row.id]"
+        mat-icon-button
+        color="warn"
+        aria-label="Example icon button with a heart icon"
+      >
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+<mat-paginator
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page of users"
+></mat-paginator>

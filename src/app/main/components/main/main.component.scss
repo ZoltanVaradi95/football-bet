@@ -1,0 +1,120 @@
+.title-container {
+  display: flex;
+  margin: auto;
+}
+
+:host {
+  --last-column-justify: flex-end;
+  --last-column-flex: 1;
+
+  position: relative;
+  display: flex;
+  min-width: 300px;
+  flex-direction: column;
+
+  ::ng-deep {
+    .mat-table,
+    .mat-row,
+    .mat-header-row,
+    .mat-paginator {
+      border-color: rgb(195, 195, 195) !important;
+    }
+
+    .mat-table {
+      min-width: 100%;
+      width: 100%;
+      border: 1px solid;
+      border-radius: 10px 10px;
+      border-bottom: none;
+      box-shadow: none !important;
+      overflow: hidden;
+    }
+
+    .mat-row {
+      transition: background-color 0.15s ease-in-out;
+      border-bottom: 1px solid;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: rgb(81, 81, 81) !important;
+      }
+
+      &.row-deleted {
+        background-color: var(--error-color-background);
+        opacity: 0.75;
+
+        &:hover {
+          background-color: var(--error-color-background) !important;
+        }
+      }
+    }
+
+    .mat-cell,
+    .mat-header-cell,
+    .mat-footer-cell {
+      word-break: break-word;
+
+      &:last-child {
+        flex: var(--last-column-flex);
+        justify-content: var(--last-column-justify);
+      }
+
+      &.text-right {
+        justify-content: flex-end;
+      }
+    }
+
+    .mat-header-cell {
+      font-size: 14px;
+      font-weight: 500 !important;
+    }
+
+    .mat-paginator {
+      border-radius: 0 0 10px 10px;
+      border: 1px solid;
+    }
+
+    .image-cell {
+      width: 170px;
+      min-width: 170px;
+      max-width: 170px;
+    }
+  }
+
+  .striped {
+    ::ng-deep .mat-row:nth-child(odd) {
+      background-color: var(--bluish-color-light-grey-4);
+    }
+  }
+
+  .scrollable-content {
+    display: block;
+    width: 100%;
+    overflow-x: scroll;
+    margin-bottom: -7px;
+
+    &::-webkit-scrollbar {
+      height: 7px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--bluish-color-light-grey-1);
+      border-radius: 2px;
+
+      &:hover {
+        background: var(--bluish-color-dark-grey-2);
+      }
+    }
+
+    ::ng-deep .mat-table {
+      width: max-content;
+    }
+  }
+}
