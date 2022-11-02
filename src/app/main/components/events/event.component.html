@@ -1,7 +1,7 @@
 <div class="title-container">
-  <h1>Football competitions</h1>
+  <h1>Football events</h1>
 </div>
-
+<!-- Load all football events for that competition -->
 <div>
   <mat-form-field appearance="fill">
     <mat-label>Status</mat-label>
@@ -23,19 +23,19 @@
   class="mat-elevation-z8"
   *ngIf="dataSource"
 >
-  <!-- Position Column -->
+  <!-- Area Column -->
   <ng-container matColumnDef="area">
     <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{ row.area.name }}</mat-cell>
   </ng-container>
 
-  <!-- Position Column -->
+  <!-- Home Column -->
   <ng-container matColumnDef="home">
     <mat-header-cell *matHeaderCellDef> Home </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{ row.homeTeam.name }}</mat-cell>
   </ng-container>
 
-  <!-- Name Column -->
+  <!-- Score Column -->
   <ng-container matColumnDef="score">
     <mat-header-cell *matHeaderCellDef> Score </mat-header-cell>
     <mat-cell *matCellDef="let row"
@@ -46,19 +46,21 @@
     >
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- Away Column -->
   <ng-container matColumnDef="away">
     <mat-header-cell *matHeaderCellDef> Away </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{ row.awayTeam.name }} </mat-cell>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- Date Column -->
   <ng-container matColumnDef="utcDate">
     <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.utcDate | date: "short"}} </mat-cell>
+    <mat-cell *matCellDef="let row">
+      {{ row.utcDate | date: "short" }}
+    </mat-cell>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- Status Column -->
   <ng-container matColumnDef="status">
     <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{ row.status }} </mat-cell>
@@ -85,5 +87,5 @@
 <mat-paginator
   [pageSize]="10"
   [pageSizeOptions]="[5, 10, 25, 100]"
-  aria-label="Select page of users"
+  aria-label="Select page of events"
 ></mat-paginator>

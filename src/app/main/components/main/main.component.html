@@ -1,3 +1,4 @@
+<!-- Main page is listing all available competitions -->
 <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource">
   <!-- Name Column -->
   <ng-container matColumnDef="name">
@@ -5,13 +6,13 @@
     <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
   </ng-container>
 
-  <!-- code Column -->
+  <!-- Code Column -->
   <ng-container matColumnDef="code">
     <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{ row.code }} </mat-cell>
   </ng-container>
 
-  <!-- type Column -->
+  <!-- Type Column -->
   <ng-container matColumnDef="type">
     <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
     <mat-cell *matCellDef="let row"> {{ row.type }} </mat-cell>

@@ -18,11 +18,12 @@ import { MainService } from '../../services/main.service';
   styleUrls: ['./match.component.scss'],
 })
 export class MatchComponent implements OnInit, OnDestroy {
+  readonly footballStatus = Status;
+
   timeInterval!: Subscription;
   compId!: string;
   match!: Match;
   closeTimer$ = new Subject<any>();
-  readonly footballStatus = Status;
 
   constructor(
     private footballService: MainService,
@@ -31,7 +32,7 @@ export class MatchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.compId = JSON.parse(this.route.snapshot.paramMap.get('matchid')!);
-
+    // I've used polling for data changes since on the free plan of the api I only get 10 request per minute the interval is set to 10 seconds.
     this.timeInterval = interval(10000)
       .pipe(
         startWith(0),
@@ -41,6 +42,7 @@ export class MatchComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (res: Match) => {
           this.match = res;
+          // When the match is no longer INPLAY then we set the timer to true and we end the polling
           if (this.match.status !== this.footballStatus.IN_PLAY) {
             this.closeTimer$.next(true);
           }

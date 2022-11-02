@@ -20,16 +20,7 @@ import { MainService } from '../../services/main.service';
 })
 export class EventComponent implements OnInit {
   readonly eventStatus = Status;
-
-  compId!: string;
-
-  eventStatusFilter!: Status;
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  displayedColumns: string[] = [
+  readonly displayedColumns: string[] = [
     'area',
     'home',
     'score',
@@ -38,13 +29,20 @@ export class EventComponent implements OnInit {
     'status',
     'actionButtons',
   ];
+
+  compId!: string;
+  eventStatusFilter!: Status;
   dataSource!: MatTableDataSource<Match>;
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private footballService: MainService,
     private route: ActivatedRoute
   ) {}
-
+  // Load event data onInit
   ngOnInit(): void {
     this.compId = JSON.parse(this.route.snapshot.paramMap.get('id')!);
     this.footballService
@@ -58,7 +56,7 @@ export class EventComponent implements OnInit {
           (this.dataSource = new MatTableDataSource(item.matches))
       );
   }
-
+  // Filtering by status
   onFilterChange(filter: MatSelectChange) {
     this.footballService
       .getMatches(this.compId, filter.value.value)
